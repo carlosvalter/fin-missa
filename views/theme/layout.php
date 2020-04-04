@@ -394,6 +394,12 @@ if (!array_key_exists('user', $_SESSION))
                   <p>Tipos de Missas</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="<?= $router->route("cash.index"); ?>">
+                  <i class="fas fa-desktop"></i>
+                  <p>Caixa</p>
+                </a>
+              </li>
             <?php
             endif;
             ?>

@@ -65,6 +65,19 @@ $router->get("/relatorio", "Masses:report", "masses.report");
 $router->post("/relatorio", "Masses:report", "masses.report");
 
 /**
+ * CASH
+ */
+$router->group("caixa");
+$router->get("/", "Cash:index", "cash.index");
+$router->get("/cadastrar", "Cash:new", "cash.new");
+$router->post("/cadastrar", "Cash:new", "cash.new");
+$router->get("/deletar/{id_cash}", "Cash:delete", "cash.delete");
+$router->get("/editar/{id_cash}", "Cash:update", "cash.update");
+$router->get("/retirar/{id_cash}", "Cash:withdraw", "cash.withdraw");
+$router->post("/retirar", "Cash:withdrawNew", "cash.withdrawNew");
+
+
+/**
  * Camada: WEB
  */
 // $router->group(null);
