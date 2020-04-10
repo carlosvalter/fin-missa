@@ -6,10 +6,9 @@
 define("SITE", [
   "name" => "Sistema Financeiro | Missa",
   "desc" => "Controle financeiro de pedidos de intensão da santa missa, doações e apadrinhamento de seminaristas.",
-  "domain" => "fin-missa.santuariosetelagoas.com.br",
+  "domain" => "fin-missa.dominio.com.br",
   "locale" => "pt_BR",
   "root" => "http://localhost/fin-missa"
-  // "root" => "http://192.168.25.10/fin-missa"
 ]);
 
 /**

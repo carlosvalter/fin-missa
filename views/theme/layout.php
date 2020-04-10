@@ -9,7 +9,7 @@ if (!array_key_exists('user', $_SESSION))
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title><?= $title ?></title>
   <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
-  <link rel="icon" href="<?= asset("img/icon.ico") ?>" type="image/x-icon" />
+  <link rel="icon" href="<?= asset("img/favicon.ico") ?>" type="image/x-icon" />
 
   <!-- Fonts and icons -->
   <script src="<?= asset("js/plugin/webfont/webfont.min.js") ?>"></script>
@@ -44,7 +44,7 @@ if (!array_key_exists('user', $_SESSION))
       <div class="logo-header" data-background-color="blue">
 
         <a href="index.html" class="logo">
-          <img src="<?= asset("img/logo.svg") ?>" alt="navbar brand" class="navbar-brand">
+          <img src="<?= asset("img/logo.png") ?>" alt="navbar brand" class="navbar-brand">
         </a>
         <button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon">
@@ -72,7 +72,7 @@ if (!array_key_exists('user', $_SESSION))
                     <i class="fa fa-search search-icon"></i>
                   </button>
                 </div>
-                <input type="text" placeholder="Search ..." class="form-control">
+                <input type="text" placeholder="Procurar..." class="form-control" disabled>
               </div>
             </form>
           </div>
@@ -82,7 +82,7 @@ if (!array_key_exists('user', $_SESSION))
                 <i class="fa fa-search"></i>
               </a>
             </li>
-            <li class="nav-item dropdown hidden-caret">
+            <!-- <li class="nav-item dropdown hidden-caret">
               <a class="nav-link dropdown-toggle" href="#" id="messageDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fa fa-envelope"></i>
               </a>
@@ -151,8 +151,8 @@ if (!array_key_exists('user', $_SESSION))
                   <a class="see-all" href="javascript:void(0);">See all messages<i class="fa fa-angle-right"></i> </a>
                 </li>
               </ul>
-            </li>
-            <li class="nav-item dropdown hidden-caret">
+            </li> -->
+            <!-- <li class="nav-item dropdown hidden-caret">
               <a class="nav-link dropdown-toggle" href="#" id="notifDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fa fa-bell"></i>
                 <span class="notification">4</span>
@@ -209,8 +209,8 @@ if (!array_key_exists('user', $_SESSION))
                   <a class="see-all" href="javascript:void(0);">See all notifications<i class="fa fa-angle-right"></i> </a>
                 </li>
               </ul>
-            </li>
-            <li class="nav-item dropdown hidden-caret">
+            </li> -->
+            <!-- <li class="nav-item dropdown hidden-caret">
               <a class="nav-link" data-toggle="dropdown" href="#" aria-expanded="false">
                 <i class="fas fa-layer-group"></i>
               </a>
@@ -262,18 +262,20 @@ if (!array_key_exists('user', $_SESSION))
                   </div>
                 </div>
               </div>
-            </li>
+            </li> -->
             <li class="nav-item dropdown hidden-caret">
               <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false">
                 <div class="avatar-sm">
-                  <img src="<?= asset("img/profile.jpg") ?>" alt="..." class="avatar-img rounded-circle">
+                  <img src="<?= asset("img/profile3.jpg") ?>" alt="..." class="avatar-img rounded-circle">
                 </div>
               </a>
               <ul class="dropdown-menu dropdown-user animated fadeIn">
                 <div class="dropdown-user-scroll scrollbar-outer">
                   <li>
                     <div class="user-box">
-                      <div class="avatar-lg"><img src="<?= asset("img/profile.jpg") ?>" alt="image profile" class="avatar-img rounded"></div>
+                      <div class="avatar-lg">
+                        <img src="<?= asset("img/profile3.jpg") ?>" alt="image profile" class="avatar-img rounded">
+                      </div>
                       <div class="u-text">
                         <h4><?= $_SESSION['user']['name'] ?></h4>
                         <?=
@@ -284,12 +286,12 @@ if (!array_key_exists('user', $_SESSION))
                     </div>
                   </li>
                   <li>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">My Profile</a>
-                    <a class="dropdown-item" href="#">My Balance</a>
-                    <a class="dropdown-item" href="#">Inbox</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Account Setting</a>
+                    <!-- <div class="dropdown-divider"></div> -->
+                    <!-- <a class="dropdown-item" href="#">Meu Perfil</a> -->
+                    <!-- <a class="dropdown-item" href="#">My Balance</a> -->
+                    <!-- <a class="dropdown-item" href="#">Inbox</a> -->
+                    <!-- <div class="dropdown-divider"></div> -->
+                    <!-- <a class="dropdown-item" href="#">Account Setting</a> -->
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="<?= $router->route("auth.logout"); ?>">Logout</a>
                   </li>
@@ -307,9 +309,9 @@ if (!array_key_exists('user', $_SESSION))
       <div class="sidebar-wrapper scrollbar scrollbar-inner">
         <div class="sidebar-content">
           <div class="user">
-            <div class="avatar-sm float-left mr-2">
+            <!-- <div class="avatar-sm float-left mr-2">
               <img src="<?= asset("img/profile.jpg") ?>" alt="..." class="avatar-img rounded-circle">
-            </div>
+            </div> -->
             <div class="info">
               <a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
                 <span>
@@ -319,12 +321,12 @@ if (!array_key_exists('user', $_SESSION))
                       ($_SESSION['user']['level'] == 1) ? 'Padre' : 'Secretária';
                     ?>
                   </span>
-                  <span class="caret"></span>
+                  <!-- <span class="caret"></span> -->
                 </span>
               </a>
-              <div class="clearfix"></div>
+              <!-- <div class="clearfix"></div> -->
 
-              <div class="collapse in" id="collapseExample">
+              <!-- <div class="collapse in" id="collapseExample">
                 <ul class="nav">
                   <li>
                     <a href="#profile">
@@ -342,7 +344,7 @@ if (!array_key_exists('user', $_SESSION))
                     </a>
                   </li>
                 </ul>
-              </div>
+              </div> -->
             </div>
           </div>
           <!-- Side menu -->
@@ -352,13 +354,13 @@ if (!array_key_exists('user', $_SESSION))
             ?>
               <li class="nav-item">
                 <a href="<?= $router->route("typesintention.index"); ?>">
-                  <i class="fas fa-desktop"></i>
+                  <i class="fas fa-location-arrow"></i>
                   <p>Tipos de Intenções</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="<?= $router->route("users.index"); ?>">
-                  <i class="fas fa-desktop"></i>
+                  <i class="fas fa-user-edit"></i>
                   <p>Usuários</p>
                 </a>
               </li>
@@ -377,12 +379,14 @@ if (!array_key_exists('user', $_SESSION))
                   <ul class="nav nav-collapse">
                     <li>
                       <a href="<?= $router->route("masses.index"); ?>">
-                        <span class="sub-item">Pedidos de Missas</span>
+                        <i class="fas fa-hands"></i>
+                        <p>Pedidos de Missas</p>
                       </a>
                     </li>
                     <li>
                       <a href="<?= $router->route("masses.report"); ?>">
-                        <span class="sub-item">Relatório de Missas</span>
+                        <i class="fas fa-paste"></i>
+                        <p>Relatório de Missas</p>
                       </a>
                     </li>
                   </ul>
@@ -390,19 +394,30 @@ if (!array_key_exists('user', $_SESSION))
               </li>
               <li class="nav-item">
                 <a href="<?= $router->route("typesmass.index"); ?>">
-                  <i class="fas fa-desktop"></i>
+                  <i class="fas fa-school"></i>
                   <p>Tipos de Missas</p>
                 </a>
               </li>
+            <?php
+            endif;
+            if ($_SESSION['user']['level'] == 1) :
+            ?>
               <li class="nav-item">
                 <a href="<?= $router->route("cash.index"); ?>">
-                  <i class="fas fa-desktop"></i>
+                  <i class="fas fa-dollar-sign"></i>
                   <p>Caixa</p>
                 </a>
               </li>
             <?php
             endif;
             ?>
+            <li class="nav-item">
+              <a href="<?= $router->route("auth.logout"); ?>">
+                <i class="fas fa-sign-out-alt"></i>
+                <p>Sair</p>
+              </a>
+            </li>
+
           </ul>
         </div>
       </div>
@@ -414,7 +429,7 @@ if (!array_key_exists('user', $_SESSION))
         <div class="page-inner">
           <div class="page-header">
             <h4 class="page-title"><?= $pageTitle ?></h4>
-            <ul class="breadcrumbs">
+            <!-- <ul class="breadcrumbs">
               <li class="nav-home">
                 <a href="#">
                   <i class="flaticon-home"></i>
@@ -432,7 +447,7 @@ if (!array_key_exists('user', $_SESSION))
               <li class="nav-item">
                 <a href="#">Starter Page</a>
               </li>
-            </ul>
+            </ul> -->
           </div>
           <div class="page-category">
             <!-- Inner page content goes here -->
@@ -444,7 +459,7 @@ if (!array_key_exists('user', $_SESSION))
         <div class="container-fluid">
           <nav class="pull-left">
             <ul class="nav">
-              <li class="nav-item">
+              <!-- <li class="nav-item">
                 <a class="nav-link" href="https://www.themekita.com">
                   ThemeKita
                 </a>
@@ -453,16 +468,16 @@ if (!array_key_exists('user', $_SESSION))
                 <a class="nav-link" href="#">
                   Help
                 </a>
-              </li>
+              </li> -->
               <li class="nav-item">
-                <a class="nav-link" href="#">
-                  Licenses
+                <a class="nav-link" href="https://pt.wikipedia.org/wiki/Licen%C3%A7a_MIT" target="_blank">
+                  Licença MIT
                 </a>
               </li>
             </ul>
           </nav>
           <div class="copyright ml-auto">
-            2018, made with <i class="fa fa-heart heart text-danger"></i> by <a href="https://www.themekita.com">ThemeKita</a>
+            2020, feito com <i class="fa fa-heart heart text-danger"></i> por <a target="_blank" href="https://www.5bits.com.br">5 Bits</a>
           </div>
         </div>
       </footer>
@@ -483,13 +498,13 @@ if (!array_key_exists('user', $_SESSION))
 
 
   <!-- Chart JS -->
-  <script src="<?= asset("js/plugin/chart.js/chart.min.js") ?>"></script>
+  <!-- <script src="<?= asset("js/plugin/chart.js/chart.min.js") ?>"></script> -->
 
   <!-- jQuery Sparkline -->
   <script src="<?= asset("js/plugin/jquery.sparkline/jquery.sparkline.min.js") ?>"></script>
 
   <!-- Chart Circle -->
-  <script src="<?= asset("js/plugin/chart-circle/circles.min.js") ?>"></script>
+  <!-- <script src="<?= asset("js/plugin/chart-circle/circles.min.js") ?>"></script> -->
 
   <!-- Datatables -->
   <script src="<?= asset("js/plugin/datatables/datatables.min.js") ?>"></script>
@@ -498,8 +513,8 @@ if (!array_key_exists('user', $_SESSION))
   <script src="<?= asset("js/plugin/bootstrap-notify/bootstrap-notify.min.js") ?>"></script>
 
   <!-- jQuery Vector Maps -->
-  <script src="<?= asset("js/plugin/jqvmap/jquery.vmap.min.js") ?>"></script>
-  <script src="<?= asset("js/plugin/jqvmap/maps/jquery.vmap.world.js") ?>"></script>
+  <!-- <script src="<?= asset("js/plugin/jqvmap/jquery.vmap.min.js") ?>"></script> -->
+  <!-- <script src="<?= asset("js/plugin/jqvmap/maps/jquery.vmap.world.js") ?>"></script> -->
 
   <!-- Sweet Alert -->
   <script src="<?= asset("js/plugin/sweetalert/sweetalert.min.js") ?>"></script>
