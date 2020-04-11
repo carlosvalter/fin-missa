@@ -463,12 +463,12 @@ if (!array_key_exists('user', $_SESSION))
                 <a class="nav-link" href="https://www.themekita.com">
                   ThemeKita
                 </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  Help
-                </a>
               </li> -->
+              <li class="nav-item">
+                <a class="nav-link" href="https://github.com/carlosvalter/fin-missa/releases" target="_blank" data-toggle="tooltip" data-placement="top" title="Verifique novas atualizações">
+                  <v1 class="0 1">v1.0.1</v1>
+                </a>
+              </li>
               <li class="nav-item">
                 <a class="nav-link" href="https://pt.wikipedia.org/wiki/Licen%C3%A7a_MIT" target="_blank">
                   Licença MIT

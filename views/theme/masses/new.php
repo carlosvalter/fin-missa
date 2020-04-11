@@ -238,7 +238,6 @@
    */
   function reLoad() {
     document.location.reload(false); 
-    // PRECISA DE UM TEMPO PARA PODER LER O ERRO EXIBIDO PARA O USUARIO
   }
 </script>
 <?php $v->end(); ?>

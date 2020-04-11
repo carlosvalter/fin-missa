@@ -49,11 +49,12 @@ $(function () {
                         },
                     });
 
-                    if (su.message.type == "success")
+                    if (su.message.type === "success") {
                         document.getElementById('form').reset();
                         if (typeof reLoad === 'function') {
-                            reLoad();
+                            setTimeout(reLoad, 3000);
                         }
+                    }
                     return;
                 }
 
