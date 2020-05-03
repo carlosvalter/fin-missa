@@ -26,9 +26,11 @@ A principio projetado para controlar o financeiro referente a:
 
 ---
 ## Impressão de pedidos de missa
+### Tela de impressão
 ![Tela de Impressão de pedidos de missa](./views/assets/img/screenshot/tela-rel-pedido-missa.png)
 
 ---
+### PDF pedidos de missa
 ![PDF pedidos de missa](./views/assets/img/screenshot/pdf-rel-pedido-missa.png)
 
 ---
