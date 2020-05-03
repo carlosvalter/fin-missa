@@ -1,10 +1,51 @@
 # Fin-missa – Sistema Financeiro Católico
 
-Esse sistema tem como objetivo o controle da parte financeira de igrejas Católicas Apostólica Romana.
+Esse sistema tem como objetivo o controle da parte financeira de igrejas Católicas Apostólica Romana e gerar **impressão dos pedidos de missa**, para leitura na abertura da missa.
+
 A principio projetado para controlar o financeiro referente a:
 * Pedido de intenção de missa;
 * Doação;
 * Apadrinhamento.
+
+# Screenshot
+
+## Login
+![Login](./views/assets/img/screenshot/login.png)
+
+---
+## Tipos de missa
+![Tipos de missa](./views/assets/img/screenshot/tipos-de-missa.png)
+
+---
+## Tipos de intenções
+![Tipos de intenções](./views/assets/img/screenshot/tipos-de-intencoes.png)
+
+---
+## Pedidos de missa
+![Pedidos de missa](./views/assets/img/screenshot/pedidos-de-missa.png)
+
+---
+## Impressão de pedidos de missa
+![Tela de Impressão de pedidos de missa](./views/assets/img/screenshot/tela-rel-pedido-missa.png)
+
+---
+![PDF pedidos de missa](./views/assets/img/screenshot/pdf-rel-pedido-missa.png)
+
+---
+## Caixa
+![Caixa](./views/assets/img/screenshot/caixa.png)
+
+---
+## Retirada do caixa
+![Retirada do caixa](./views/assets/img/screenshot/retirada-do-caixa.png)
+
+---
+## Diagrama de entidades relacionais
+![DER](./projeto-db/Diagrama-ER.png)
+
+---
+
+# Funcionamento
 
 Nessa primeira versão esta disponível somente o módulo de **Pedido de intenção de Missa**.
 
