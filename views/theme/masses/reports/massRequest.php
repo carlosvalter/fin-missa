@@ -10,7 +10,7 @@
       margin: 0;
       padding: 0;
       line-height: 1.4em;
-      font-size: 8.5pt;
+      font-size: 10.5pt;
       font-family: verdana, arial, helvetica, sans-serif;
       color: #000000;
       /*orphans: 3; Numero minimo de linha no inicio da pag*/
@@ -94,7 +94,7 @@
 
     tr th,
     tr td {
-      border: solid 1px black;
+      border: solid 1px #CCC;
     }
 
     thead,
@@ -141,6 +141,7 @@ $dayWeekNumber = date('w', strtotime($date));
 ?>
   <div class="relatorio">
     <h2>Celebração Eucarística</h2>
+    <h3><?= $typeMass->title ?></h3>
 
     <table class="date">
       <thead>
