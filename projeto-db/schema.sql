@@ -42,6 +42,7 @@ CREATE TABLE IF NOT EXISTS `cash` (
   PRIMARY KEY (`id_cash`))
 ENGINE = InnoDB;
 
+ALTER TABLE `cash` CHANGE `amount` `amount` DECIMAL(14,2) NULL DEFAULT '0.00';
 
 -- -----------------------------------------------------
 -- Table `typesMass`
@@ -99,6 +100,7 @@ CREATE TABLE IF NOT EXISTS `masses` (
 ENGINE = InnoDB
 COMMENT = 'Masses with requests from the faithful';
 
+ALTER TABLE `masses` CHANGE `faithful` `faithful` VARCHAR(350) NOT NULL;
 
 -- -----------------------------------------------------
 -- Table `sponsorship`

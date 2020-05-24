@@ -42,8 +42,8 @@
             <td>
               <?php
               $contentPopover = $mass->getTypeMass()->title . ' - ' . substr($mass->getTypeMass()->hour, 0, 5);
-              $price = number_format(floatval($mass->getTypeMass()->price), 2, ',', '.');
-              $contentPopover .= ($price) ? " - R$ {$price}" : '';
+              $price = number_format(floatval($mass->amount_paid), 2, ',', '.');
+              $contentPopover .= ($price) ? " - R$ {$price}" : ' R$ 0,00';
               ?>
               <button class="badge badge-info" data-toggle="popover" data-container="body" data-placement="top" data-content="<?= $contentPopover ?>" data-original-title="Missa">
                 Info

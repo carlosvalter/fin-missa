@@ -75,6 +75,8 @@ $router->get("/deletar/{id_cash}", "Cash:delete", "cash.delete");
 $router->get("/editar/{id_cash}", "Cash:update", "cash.update");
 $router->get("/retirar/{id_cash}", "Cash:withdraw", "cash.withdraw");
 $router->post("/retirar", "Cash:withdrawNew", "cash.withdrawNew");
+$router->get("/relatorio", "Cash:reportCashMovement", "cash.reportCashMovement");
+$router->post("/relatorio", "Cash:reportCashMovement", "cash.reportCashMovement");
 
 
 /**

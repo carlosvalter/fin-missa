@@ -20,7 +20,9 @@ class Masses extends Controller
 
   public function index(): void
   {
-    $masses = (new EntityMass())->find()->order('date, id_type_intention')->fetch(true);
+    $dateNow = date('Y-m-d');
+    
+    $masses = (new EntityMass())->find("date >= :date", "date={$dateNow}")->order('date, id_type_intention')->fetch(true);
 
     echo $this->view->render("theme/masses/index", [
       "title" => "Pedidos de Missa | " . site("name"),
@@ -60,7 +62,9 @@ class Masses extends Controller
 
       if ($data['typeMass']) {
         // Mass special
-        $save = $this->saveMass($typeMass, $typeIntention, $cash, $data['faithful'], $data['price'], $data['date']);
+        $amount = convertToCurrencyDB($data['amount']);
+
+        $save = $this->saveMass($typeMass, $typeIntention, $cash, $data['faithful'], $amount, $data['date']);
 
         if ($save['ok']) {
           echo $this->ajaxResponse("message", [
@@ -70,7 +74,7 @@ class Masses extends Controller
         } else {
           echo $this->ajaxResponse("message", [
             "type" => "danger",
-            "message" => "Erro na gravação! \n" . $save['message']
+            "message" => "Erro na gravação!" . $save['message']
           ]);
           return;
         }
@@ -79,13 +83,15 @@ class Masses extends Controller
         if ($data['typeDate'] === 'variadas') {
           $datesArray = explode(', ', $data['date']);
 
+          $amount = convertToCurrencyDB($data['amount']) / count($datesArray);
+
           foreach ($datesArray as $date) {
-            $save = $this->saveMass($typeMass, $typeIntention, $cash, $data['faithful'], $data['price'], $date);
+            $save = $this->saveMass($typeMass, $typeIntention, $cash, $data['faithful'], $amount, $date);
 
             if (!$save['ok']) {
               echo $this->ajaxResponse("message", [
                 "type" => "danger",
-                "message" => "Erro na gravação! \n" . $save['message']
+                "message" => "Erro na gravação!" . $save['message']
               ]);
               return;
             }
@@ -104,15 +110,21 @@ class Masses extends Controller
           $dateBegin = DateTime::createFromFormat('d/m/Y', $datesArray[0]);
           $dateEnd = DateTime::createFromFormat('d/m/Y', $datesArray[1]);
 
+          // Resgata diferença entre as datas
+          $dateInterval = $dateBegin->diff($dateEnd);
+          $days =  $dateInterval->days + 1; // + 1 add the first day
+
+          $amount = convertToCurrencyDB($data['amount']) / $days;
+
           while ($dateBegin <= $dateEnd) {
             $date = $dateBegin->format('d/m/Y');
 
-            $save = $this->saveMass($typeMass, $typeIntention, $cash, $data['faithful'], $data['price'], $date);
+            $save = $this->saveMass($typeMass, $typeIntention, $cash, $data['faithful'], $amount, $date);
 
             if (!$save['ok']) {
               echo $this->ajaxResponse("message", [
                 "type" => "danger",
-                "message" => "Erro na gravação! \n" . $save['message']
+                "message" => "Erro na gravação!" . $save['message']
               ]);
               return;
             }
@@ -132,7 +144,7 @@ class Masses extends Controller
       if (!$cash->save()) {
         echo $this->ajaxResponse("message", [
           "type" => "danger",
-          "message" => "Erro na gravação do caixa! \n" . $cash->fail()->getMessage()
+          "message" => "Erro na gravação do caixa!" . $cash->fail()->getMessage()
         ]);
         return;
       }
@@ -160,7 +172,7 @@ class Masses extends Controller
     if ($mass->destroy() && $cash->save()) {
       notify("success", "Registro apagado com sucesso!");
     } else {
-      notify("danger", "Erro na exclusão! \n" . $mass->fail()->getMessage());
+      notify("danger", "Erro na exclusão!");
     }
 
     $this->router->redirect('masses.index');
@@ -192,7 +204,7 @@ class Masses extends Controller
 
       $masses = (new EntityMass())
         ->find("id_type_mass = :id_type_mass AND date = :date", "id_type_mass={$typeMass->id_type_mass}&date={$date}")
-        ->order("id_type_intention, faithful")
+        ->order("id_type_intention")
         ->fetch(true);
 
       if ($masses) {

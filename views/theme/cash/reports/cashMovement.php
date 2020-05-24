@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pedidos de Missa</title>
+  <title>Movimento de Caixa</title>
   <style>
     .relatorio {
       margin: 0;
@@ -131,56 +131,47 @@
 
 <body>
   <?php
-  include(dirname(__DIR__,2)."/report-header.php");
-  include(dirname(__DIR__,2)."/report-footer.php");
+  include(dirname(__DIR__, 2) . "/report-header.php");
+  include(dirname(__DIR__, 2) . "/report-footer.php");
   ?>
 
-<?php
-$dayWeekArray = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'];
-$dayWeekNumber = date('w', strtotime($date));
-?>
   <div class="relatorio">
-    <h2>Celebração Eucarística</h2>
-    <h3><?= $typeMass->title ?></h3>
+    <h2>Movimento de Caixa</h2>
+    <h3>Entradas no caixa do dia <?= $data['created_at'] ?></h3>
 
-    <table class="date">
+    <table class="relatorio">
       <thead>
         <tr>
-          <th class="date" style="text-align: left">Data: <?= $data['date'] ?></th>
-          <th class="date"><?= $dayWeekArray[$dayWeekNumber] ?></th>
-          <th class="date" style="text-align: right"><?= substr($typeMass->hour, 0, 5) ?> hs</th>
+          <th>Caixa</th>
+          <th>Valor</th>
         </tr>
       </thead>
-    </table>
-    <br>
-    <?php
-    foreach ($massesArray as $titleTypeIntention => $masses) : ?>
-      <table class="relatorio">
-        <thead>
-          <tr>
-            <th colspan="2"><?= $titleTypeIntention ?></th>
-          </tr>
-        </thead>
-        <?php
-        foreach ($masses as $key => $mass) :
-          if (!($key % 2)) : ?>
-            <tr>
-              <td class="col1"><?= $mass->faithful ?></td>
+      <?php
+      $totalAmount = 0.00;
+      foreach ($massesArray as $nameCash => $masses) : ?>
+        <tr>
+          <td><?= $nameCash ?></td>
+          <td>
             <?php
-            $openTr = true; // Flag used to check if the tag <tr> has opened
-          else : ?>
-              <td class="col2"><?= $mass->faithful ?></td>
-            </tr>
-        <?php
-            $openTr = false; // Flag used to check if the tag <tr> has closed
-          endif;
-        endforeach;
-        echo ($openTr) ? '<td></td></tr>' : ''; // Close tag <tr> if it was left open in even columns
-        ?>
-      </table>
-      <br><br>
-    <?php
-    endforeach; ?>
+            $amount = 0.00;
+            foreach ($masses as $key => $mass) {
+              $amount += $mass->amount_paid;
+            }
+            echo "R$ " . number_format($amount, 2, ',', '.');
+            $totalAmount += $amount;
+            ?>
+          </td>
+        </tr>
+      <?php
+      endforeach; ?>
+      <tfoot>
+        <tr>
+          <th>Total</th>
+          <th><?= "R$ " . number_format($totalAmount, 2, ',', '.'); ?></th>
+        </tr>
+      </tfoot>
+    </table>
+    <br><br>
   </div>
 
 </body>

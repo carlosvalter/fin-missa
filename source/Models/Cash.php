@@ -8,7 +8,7 @@ class Cash extends DataLayer
 {
   public function __construct()
   {
-    parent::__construct("cash", ["name", "amount"], "id_cash");
+    parent::__construct("cash", ["name"], "id_cash");
   }
 
   /**
@@ -23,7 +23,7 @@ class Cash extends DataLayer
 
   public function save(): bool
   {
-    if (empty($this->name) | empty($this->amount) | !parent::save()) {
+    if (empty($this->name) | !parent::save()) {
       return false;
     } else {
       return true;

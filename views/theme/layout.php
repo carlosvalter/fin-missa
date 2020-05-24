@@ -403,10 +403,27 @@ if (!array_key_exists('user', $_SESSION))
             if ($_SESSION['user']['level'] == 1) :
             ?>
               <li class="nav-item">
-                <a href="<?= $router->route("cash.index"); ?>">
-                  <i class="fas fa-dollar-sign"></i>
+                <a data-toggle="collapse" href="#submenu-2">
+                  <i class="fas fa-bars"></i>
                   <p>Caixa</p>
+                  <span class="caret"></span>
                 </a>
+                <div class="collapse" id="submenu-2">
+                  <ul class="nav nav-collapse">
+                    <li>
+                      <a href="<?= $router->route("cash.index"); ?>">
+                        <i class="fas fa-dollar-sign"></i>
+                        <p>Caixa</p>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="<?= $router->route("cash.reportCashMovement"); ?>">
+                        <i class="fas fa-paste"></i>
+                        <p>Relatório de Movimento</p>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
               </li>
             <?php
             endif;
@@ -466,7 +483,7 @@ if (!array_key_exists('user', $_SESSION))
               </li> -->
               <li class="nav-item">
                 <a class="nav-link" href="https://github.com/carlosvalter/fin-missa/releases" target="_blank" data-toggle="tooltip" data-placement="top" title="Verifique novas atualizações">
-                  <v1 class="0 1">v1.2.0</v1>
+                  <v1 class="0 1">v1.3.0</v1>
                 </a>
               </li>
               <li class="nav-item">

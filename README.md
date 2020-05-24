@@ -30,12 +30,16 @@ A principio projetado para controlar o financeiro referente a:
 ![Tela de Impressão de pedidos de missa](./views/assets/img/screenshot/tela-rel-pedido-missa.png)
 
 ---
-### PDF pedidos de missa
-![PDF pedidos de missa](./views/assets/img/screenshot/pdf-rel-pedido-missa.png)
+### PDF Pedidos de missa
+![PDF Pedidos de missa](./views/assets/img/screenshot/pdf-rel-pedido-missa.png)
 
 ---
 ## Caixa
 ![Caixa](./views/assets/img/screenshot/caixa.png)
+
+---
+## PDF Movimento do Caixa
+![PDF movimento do caixa](./views/assets/img/screenshot/pdf-rel-movimento-caixa.png)
 
 ---
 ## Retirada do caixa
@@ -82,7 +86,7 @@ Alguns componentes do layout padrão foram `<!-- comentados -->` pelo fato de n�
 2. Crie um banco de dados em MySql e execute o script SQL localizado em `projeto-db/schema.sql`
 3. Configure em `source/Config.php` de acordo com seus dados:
 ```
-"root" => "http://dominio.com.br/fin-missa"
+"root" => "http://dominio.com.br[/fin-missa]" // [/fin-missa] somente se estiver em um subdiretório
 "domain" => "fin-missa.dominio.com.br",
 
 "host" => "localhost",

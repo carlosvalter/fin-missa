@@ -12,14 +12,6 @@ define("SITE", [
 ]);
 
 /**
- * SITE MINIFY
- */
-// So faco o minify em minha maquina
-if($_SERVER["SERVER_NAME"] == "localhost"){
-  require __DIR__."/Minify.php";
-}
-
-/**
  * DATABASE CONECTION
  */
 define("DATA_LAYER_CONFIG", [

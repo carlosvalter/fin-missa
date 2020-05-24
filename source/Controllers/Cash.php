@@ -2,7 +2,9 @@
 
 namespace Source\Controllers;
 
+use Dompdf\Dompdf;
 use Source\Models\Cash as EntityCash;
+use Source\Models\Mass as EntityMass;
 
 class Cash extends Controller
 {
@@ -136,5 +138,80 @@ class Cash extends Controller
     }
 
     $this->router->redirect('cash.index');
+  }
+
+  public function reportCashMovement(array $data)
+  {
+
+    if (!empty($data)) {
+      // Remove codigos de scripts do form
+      $data = filter_var_array($data, FILTER_SANITIZE_STRIPPED);
+
+      if (array_key_exists('created_at', $data)) {
+        $formRequired = [
+          $data['created_at']
+        ];
+
+        // Verifica se tem algum campo do form em branco
+        if (in_array("", $formRequired)) {
+          echo "<script>alert('Data obrigatória!'); window.close()</script>";
+        }
+      } else {
+        echo "<script>alert('Preencha os campos!'); window.close()</script>";
+      }
+
+      $date = convertDate($data['created_at']);
+
+      $masses = (new EntityMass())
+        ->find("created_at LIKE :created_at", "created_at={$date}%")
+        ->order("id_cash")
+        ->fetch(true);
+
+      if ($masses) {
+        $cashes = (new EntityCash())->find()->fetch(true);
+
+        //create a array of cash
+        foreach ($cashes as $cash) {
+          $cashArray[$cash->id_cash] = $cash->name;
+        }
+
+        //create a array of mass with index of cash
+        foreach ($cashArray as $id_cash => $nameCash) {
+          $i = 0;
+          foreach ($masses as $key => $mass) {
+            if ($mass->id_cash == $id_cash) {
+              $massesArray[$nameCash][$i++] = $mass;
+              unset($masses[$key]); // Diminui matriz para o proximo laço ser mais rapido
+            }
+          }
+        }
+
+        
+        $dompdf = new Dompdf(["enable_remote" => true]);
+        ob_start(); // Abre uma sessao de cache, tudo q esta abaixo ira para uma variavel de cache, e não para a tela
+
+        require dirname(__DIR__, 2) . "/views/theme/cash/reports/cashMovement.php";
+
+        $pdf = ob_get_clean(); // recebe o conteudo do cache do PHP
+
+        // For see in html discoment the line below
+        // echo $pdf; die;
+
+        $dompdf->loadHtml($pdf); // Converte o conteudo html gerado para PDF
+
+        $dompdf->setPaper("A4");
+
+        $dompdf->render();
+
+        $dompdf->stream("file.pdf", ['Attachment' => false]); // Abre o PDF
+      } else {
+        echo "<script>alert('Nenhuma caixa encontrado nessa data!'); window.close()</script>";
+      }
+    } else {
+      echo $this->view->render("theme/cash/reportCashMovement", [
+        "title" => "Relatório de Movimento de Caixa | " . site("name"),
+        "pageTitle" => "Relatório de Movimento de Caixa",
+      ]);
+    }
   }
 }
