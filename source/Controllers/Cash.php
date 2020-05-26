@@ -10,13 +10,13 @@ class Cash extends Controller
 {
   public function __construct($router)
   {
-    if (!array_key_exists('user', $_SESSION) || $_SESSION['user']['level'] != 1)
-      $router->redirect("auth.logout");
     parent::__construct($router);
   }
 
   public function index(): void
   {
+    $this->verifyUser([1]);
+
     $cashFlow = (new EntityCash())->find()->fetch(true);
 
     echo $this->view->render("theme/cash/index", [
@@ -28,6 +28,7 @@ class Cash extends Controller
 
   public function new(array $data): void
   {
+    $this->verifyUser([1]);
 
     if (!empty($data)) {
       // Remove codigos de scripts do form
@@ -96,6 +97,8 @@ class Cash extends Controller
 
   public function withdraw(array $data): void
   {
+    $this->verifyUser([1]);
+
     $cash = (new EntityCash())->findById($data['id_cash']);
 
     if (array_key_exists('withdraw', $data)) {
@@ -124,11 +127,15 @@ class Cash extends Controller
 
   public function withdrawNew(array $data): void
   {
+    $this->verifyUser([1]);
+
     $this->withdraw($data);
   }
 
   public function delete(array $data): void
   {
+    $this->verifyUser([1]);
+
     $cash = (new EntityCash())->findById($data['id_cash']);
 
     if ($cash->destroy()) {
@@ -142,6 +149,7 @@ class Cash extends Controller
 
   public function reportCashMovement(array $data)
   {
+    $this->verifyUser([1, 2]);
 
     if (!empty($data)) {
       // Remove codigos de scripts do form
@@ -186,7 +194,7 @@ class Cash extends Controller
           }
         }
 
-        
+
         $dompdf = new Dompdf(["enable_remote" => true]);
         ob_start(); // Abre uma sessao de cache, tudo q esta abaixo ira para uma variavel de cache, e não para a tela
 
@@ -213,5 +221,20 @@ class Cash extends Controller
         "pageTitle" => "Relatório de Movimento de Caixa",
       ]);
     }
+  }
+
+  /**
+   * verifyUser
+   * Verify level access
+   * 
+   * @param  array $nivel [1 ,2]
+   * @return void
+   */
+  private function verifyUser(array $nivel)
+  {
+    $access = in_array($_SESSION['user']['level'], $nivel);
+
+    if (!array_key_exists('user', $_SESSION) || !$access)
+      $this->router->redirect("auth.logout");
   }
 }

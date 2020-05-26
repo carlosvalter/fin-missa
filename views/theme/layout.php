@@ -14,18 +14,20 @@ if (!array_key_exists('user', $_SESSION))
   <!-- Fonts and icons -->
   <script src="<?= asset("js/plugin/webfont/webfont.min.js") ?>"></script>
   <script>
-    WebFont.load({
-      google: {
-        "families": ["Lato:300,400,700,900"]
-      },
-      custom: {
-        "families": ["Flaticon", "Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands", "simple-line-icons"],
-        urls: ['<?= asset("css/fonts.min.css") ?>']
-      },
-      active: function() {
-        sessionStorage.fonts = true;
-      }
-    });
+  WebFont.load({
+    google: {
+      "families": ["Lato:300,400,700,900"]
+    },
+    custom: {
+      "families": ["Flaticon", "Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands",
+        "simple-line-icons"
+      ],
+      urls: ['<?= asset("css/fonts.min.css") ?>']
+    },
+    active: function() {
+      sessionStorage.fonts = true;
+    }
+  });
   </script>
 
   <!-- CSS Files -->
@@ -46,7 +48,8 @@ if (!array_key_exists('user', $_SESSION))
         <a href="index.html" class="logo">
           <img src="<?= asset("img/logo.png") ?>" alt="navbar brand" class="navbar-brand">
         </a>
-        <button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse"
+          data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon">
             <i class="icon-menu"></i>
           </span>
@@ -78,7 +81,8 @@ if (!array_key_exists('user', $_SESSION))
           </div>
           <ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
             <li class="nav-item toggle-nav-search hidden-caret">
-              <a class="nav-link" data-toggle="collapse" href="#search-nav" role="button" aria-expanded="false" aria-controls="search-nav">
+              <a class="nav-link" data-toggle="collapse" href="#search-nav" role="button" aria-expanded="false"
+                aria-controls="search-nav">
                 <i class="fa fa-search"></i>
               </a>
             </li>
@@ -352,82 +356,84 @@ if (!array_key_exists('user', $_SESSION))
             <?php
             if ($_SESSION['user']['level'] == 1) :
             ?>
-              <li class="nav-item">
-                <a href="<?= $router->route("typesintention.index"); ?>">
-                  <i class="fas fa-location-arrow"></i>
-                  <p>Tipos de Intenções</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="<?= $router->route("users.index"); ?>">
-                  <i class="fas fa-user-edit"></i>
-                  <p>Usuários</p>
-                </a>
-              </li>
+            <li class="nav-item">
+              <a href="<?= $router->route("typesintention.index"); ?>">
+                <i class="fas fa-location-arrow"></i>
+                <p>Tipos de Intenções</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="<?= $router->route("users.index"); ?>">
+                <i class="fas fa-user-edit"></i>
+                <p>Usuários</p>
+              </a>
+            </li>
             <?php
             endif;
 
             if ($_SESSION['user']['level'] == 1 || $_SESSION['user']['level'] == 2) :
             ?>
-              <li class="nav-item">
-                <a data-toggle="collapse" href="#submenu">
-                  <i class="fas fa-bars"></i>
-                  <p>Missas</p>
-                  <span class="caret"></span>
-                </a>
-                <div class="collapse" id="submenu">
-                  <ul class="nav nav-collapse">
-                    <li>
-                      <a href="<?= $router->route("masses.index"); ?>">
-                        <i class="fas fa-hands"></i>
-                        <p>Pedidos de Missas</p>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="<?= $router->route("masses.report"); ?>">
-                        <i class="fas fa-paste"></i>
-                        <p>Relatório de Missas</p>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </li>
-              <li class="nav-item">
-                <a href="<?= $router->route("typesmass.index"); ?>">
-                  <i class="fas fa-school"></i>
-                  <p>Tipos de Missas</p>
-                </a>
-              </li>
-            <?php
-            endif;
-            if ($_SESSION['user']['level'] == 1) :
-            ?>
-              <li class="nav-item">
-                <a data-toggle="collapse" href="#submenu-2">
-                  <i class="fas fa-bars"></i>
-                  <p>Caixa</p>
-                  <span class="caret"></span>
-                </a>
-                <div class="collapse" id="submenu-2">
-                  <ul class="nav nav-collapse">
-                    <li>
-                      <a href="<?= $router->route("cash.index"); ?>">
-                        <i class="fas fa-dollar-sign"></i>
-                        <p>Caixa</p>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="<?= $router->route("cash.reportCashMovement"); ?>">
-                        <i class="fas fa-paste"></i>
-                        <p>Relatório de Movimento</p>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </li>
+            <li class="nav-item">
+              <a data-toggle="collapse" href="#submenu">
+                <i class="fas fa-bars"></i>
+                <p>Missas</p>
+                <span class="caret"></span>
+              </a>
+              <div class="collapse" id="submenu">
+                <ul class="nav nav-collapse">
+                  <li>
+                    <a href="<?= $router->route("masses.index"); ?>">
+                      <i class="fas fa-hands"></i>
+                      <p>Pedidos de Missas</p>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="<?= $router->route("masses.report"); ?>">
+                      <i class="fas fa-paste"></i>
+                      <p>Relatório de Missas</p>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+            <li class="nav-item">
+              <a href="<?= $router->route("typesmass.index"); ?>">
+                <i class="fas fa-school"></i>
+                <p>Tipos de Missas</p>
+              </a>
+            </li>
             <?php
             endif;
             ?>
+            <li class="nav-item">
+              <a data-toggle="collapse" href="#submenu-2">
+                <i class="fas fa-bars"></i>
+                <p>Caixa</p>
+                <span class="caret"></span>
+              </a>
+              <div class="collapse" id="submenu-2">
+                <ul class="nav nav-collapse">
+                  <?php
+                  if ($_SESSION['user']['level'] == 1) :
+                  ?>
+                  <li>
+                    <a href="<?= $router->route("cash.index"); ?>">
+                      <i class="fas fa-dollar-sign"></i>
+                      <p>Caixa</p>
+                    </a>
+                  </li>
+                  <?php
+                  endif;
+                  ?>
+                  <li>
+                    <a href="<?= $router->route("cash.reportCashMovement"); ?>">
+                      <i class="fas fa-paste"></i>
+                      <p>Relatório de Movimento</p>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </li>
             <li class="nav-item">
               <a href="<?= $router->route("auth.logout"); ?>">
                 <i class="fas fa-sign-out-alt"></i>
@@ -482,8 +488,9 @@ if (!array_key_exists('user', $_SESSION))
                 </a>
               </li> -->
               <li class="nav-item">
-                <a class="nav-link" href="https://github.com/carlosvalter/fin-missa/releases" target="_blank" data-toggle="tooltip" data-placement="top" title="Verifique novas atualizações">
-                  <v1 class="0 1">v1.3.0</v1>
+                <a class="nav-link" href="https://github.com/carlosvalter/fin-missa/releases" target="_blank"
+                  data-toggle="tooltip" data-placement="top" title="Verifique novas atualizações">
+                  <v1 class="0 1">v1.3.1</v1>
                 </a>
               </li>
               <li class="nav-item">
@@ -494,7 +501,8 @@ if (!array_key_exists('user', $_SESSION))
             </ul>
           </nav>
           <div class="copyright ml-auto">
-            2020, feito com <i class="fa fa-heart heart text-danger"></i> por <a target="_blank" href="https://www.5bits.com.br">5 Bits</a>
+            2020, feito com <i class="fa fa-heart heart text-danger"></i> por <a target="_blank"
+              href="https://www.5bits.com.br">5 Bits</a>
           </div>
         </div>
       </footer>
@@ -543,34 +551,34 @@ if (!array_key_exists('user', $_SESSION))
   <?= $v->section("scripts"); ?>
 
   <script type="text/javascript">
-    $(document).ready(function() {
-      $('#datatablesList').dataTable({
-        "language": {
-          "url": "//cdn.datatables.net/plug-ins/1.10.20/i18n/Portuguese-Brasil.json",
-        },
-        "pageLength": 30,
-        initComplete: function() {
-          this.api().columns().every(function() {
-            var column = this;
-            var select = $('<select class="form-control"><option value=""></option></select>')
-              .appendTo($(column.footer()).empty())
-              .on('change', function() {
-                var val = $.fn.dataTable.util.escapeRegex(
-                  $(this).val()
-                );
+  $(document).ready(function() {
+    $('#datatablesList').dataTable({
+      "language": {
+        "url": "//cdn.datatables.net/plug-ins/1.10.20/i18n/Portuguese-Brasil.json",
+      },
+      "pageLength": 30,
+      initComplete: function() {
+        this.api().columns().every(function() {
+          var column = this;
+          var select = $('<select class="form-control"><option value=""></option></select>')
+            .appendTo($(column.footer()).empty())
+            .on('change', function() {
+              var val = $.fn.dataTable.util.escapeRegex(
+                $(this).val()
+              );
 
-                column
-                  .search(val ? '^' + val + '$' : '', true, false)
-                  .draw();
-              });
-
-            column.data().unique().sort().each(function(d, j) {
-              select.append('<option value="' + d + '">' + d + '</option>')
+              column
+                .search(val ? '^' + val + '$' : '', true, false)
+                .draw();
             });
+
+          column.data().unique().sort().each(function(d, j) {
+            select.append('<option value="' + d + '">' + d + '</option>')
           });
-        }
-      });
+        });
+      }
     });
+  });
   </script>
   <!-- Show notification -->
   <?= notify() ?>
