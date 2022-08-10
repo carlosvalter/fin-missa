@@ -9,63 +9,32 @@
 </div>
 
 <div class="table-responsive">
-  <table id="datatablesList" class="display table table-striped table-hover" cellspacing="0" width="100%">
+  <table id="datatablesListMass" class="display table table-striped table-hover" cellspacing="0" width="100%">
     <thead>
-      <tr>
-        <th>Data</th>
-        <th>Intenção</th>
-        <th>Fiel</th>
-        <th>Ação</th>
-      </tr>
-    </thead>
-    <tfoot>
-      <tr>
-        <th>Data</th>
-        <th>Intenção</th>
-        <th>Fiel</th>
-        <th>Ação</th>
-      </tr>
-    </tfoot>
-    <tbody>
-      <?php
-      if ($masses) :
-        foreach ($masses as $key => $mass) :
-      ?>
           <tr>
-            <td id="date_<?= $mass->id_mass ?>" data-order="<?= $key ?>" style="white-space: nowrap;">
-              <?php
-              $data_formatada = DateTime::createFromFormat('Y-m-d', $mass->date);
-              echo $data_formatada->format('d/m/Y');
-              echo " - " . substr($mass->getTypeMass()->hour, 0, 5);
-              ?>
-            </td>
-            <td>
-              <?php
-              $contentPopover = $mass->getTypeMass()->title . ' - ' . substr($mass->getTypeMass()->hour, 0, 5);
-              $price = number_format(floatval($mass->amount_paid), 2, ',', '.');
-              $contentPopover .= ($price) ? " - R$ {$price}" : ' R$ 0,00';
-              ?>
-              <button class="badge badge-info" data-toggle="popover" data-container="body" data-placement="top" data-content="<?= $contentPopover ?>" data-original-title="Missa">
-                Info
-              </button>
-              <?= $mass->getTypeIntention()->title ?>
-            </td>
-            <td id="faithful_<?= $mass->id_mass ?>"><?= $mass->faithful ?></td>
-            <td>
-              <div class="form-button-action">
-                <button class="btn btn-link btn-danger" data-toggle="tooltip" data-original-title="Deletar" onclick="deleteMass(<?= $mass->id_mass ?>)">
-                  <i class="fa fa-times"></i>
-                </button>
-              </div>
-            </td>
+            <th>Id</th>
+            <th>Data</th>
+            <th>Horas</th>
+            <th>Info</th>
+            <th>Intenção</th>
+            <th>Fiel</th>
+            <th>Ação</th>
           </tr>
-      <?php
-        endforeach;
-      endif;
-      ?>
-    </tbody>
+        </thead>
+        <tfoot>
+          <tr>
+            <th>Id</th>
+            <th>Data</th>
+            <th>Horas</th>
+            <th>Info</th>
+            <th>Intenção</th>
+            <th>Fiel</th>
+            <th>Ação</th>
+          </tr>
+        </tfoot>
   </table>
 </div>
+
 
 <!-- Modal -->
 <div class="modal fade" id="confirmDelete" tabindex="-1" role="dialog" aria-labelledby="modalConfirmDeleteFaithful" aria-hidden="true">
@@ -105,6 +74,69 @@
 
   $(document).ready(function() {
     $('#buttonMenu').trigger('click');
+
+    $('#datatablesListMass').dataTable({
+      "language": {
+        "url": "//cdn.datatables.net/plug-ins/1.10.20/i18n/Portuguese-Brasil.json",
+      },
+      "pageLength": 30,
+      processing: true,
+      serverSide: true,
+      ajax: '<?= $router->route("masses.ajaxListMasses") ?>',
+      columnDefs: [
+        {
+          render: function (data, type, row) {
+            return data + ' - ' + row[2];
+          },
+          targets: 1,
+        },
+        {
+          render: function (data, type, row) {
+            return `
+              <button class="badge badge-info" data-toggle="popover" data-container="body" data-placement="top" data-content="`+row[3]+`" data-original-title="Missa">
+                Info
+              </button>`+ data
+          },
+          targets: 4,
+        },
+        {
+          targets: 1,
+          createdCell: function (td, cellData, rowData, row, col) {
+            $(td).attr('id', 'date_'+rowData[0]).attr('style', 'white-space: nowrap')
+          }
+        },
+        {
+          targets: 5,
+          createdCell: function (td, cellData, rowData, row, col) {
+            $(td).attr('id', 'faithful_'+rowData[0])
+          }
+        },
+        { visible: false, targets: [ 2, 3] },
+      ],
+      initComplete: function() {
+        this.api().columns().every(function() {
+          var column = this;
+          var select = $('<select class="form-control"><option value=""></option></select>')
+            .appendTo($(column.footer()).empty())
+            .on('change', function() {
+              var val = $.fn.dataTable.util.escapeRegex(
+                $(this).val()
+              );
+
+              column
+                .search(val ? '^' + val + '$' : '', true, false)
+                .draw();
+            });
+
+          column.data().unique().sort().each(function(d, j) {
+            select.append('<option value="' + d + '">' + d + '</option>')
+          });
+        });
+      },
+      fnDrawCallback: function() {
+        $('[data-toggle="popover"]').popover();
+      }
+    });
   });
 </script>
-<?php $v->end(); ?>
+<?php $v->end(); ?>             
