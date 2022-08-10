@@ -14,7 +14,7 @@ class Auth extends Controller
   public function index(): void
   {
     if (isset($_SESSION["user"])) {
-      $user = (new EntityUser())->findById($_SESSION["user"]);
+      $user = (new EntityUser())->findById($_SESSION["user"]['id_user']);
 
       echo $this->view->render("theme/users/index", [
         "title" => "Usuário | " . site("name"),
