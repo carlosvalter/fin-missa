@@ -25,6 +25,6 @@
     "coffeecode/router": "1.0.7",
     "coffeecode/datalayer": "1.1.4",
     "league/plates": "v4.0.0-alpha",
-    "dompdf/dompdf": "0.8.*"
+    "dompdf/dompdf": "2.0.*"
   }
 }
