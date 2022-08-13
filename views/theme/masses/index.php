@@ -13,6 +13,7 @@
     <thead>
           <tr>
             <th>Id</th>
+            <th>Id Tipo intensão</th>
             <th>Data</th>
             <th>Horas</th>
             <th>Info</th>
@@ -24,6 +25,7 @@
         <tfoot>
           <tr>
             <th>Id</th>
+            <th>Id Tipo intensão</th>
             <th>Data</th>
             <th>Horas</th>
             <th>Info</th>
@@ -76,42 +78,54 @@
     $('#buttonMenu').trigger('click');
 
     $('#datatablesListMass').dataTable({
-      "language": {
+      language: {
         "url": "//cdn.datatables.net/plug-ins/1.10.20/i18n/Portuguese-Brasil.json",
       },
-      "pageLength": 30,
+      pageLength: 10,
       processing: true,
       serverSide: true,
       ajax: '<?= $router->route("masses.ajaxListMasses") ?>',
+      order: [[2, 'asc'], [1, 'asc']],
       columnDefs: [
         {
           render: function (data, type, row) {
-            return data + ' - ' + row[2];
+            return data + ' - ' + row[3];
           },
-          targets: 1,
+          targets: 2,
         },
         {
           render: function (data, type, row) {
             return `
-              <button class="badge badge-info" data-toggle="popover" data-container="body" data-placement="top" data-content="`+row[3]+`" data-original-title="Missa">
+              <button class="badge badge-info" data-toggle="popover" data-container="body" data-placement="top" data-content="`+row[4]+`" data-original-title="Missa">
                 Info
               </button>`+ data
           },
-          targets: 4,
+          targets: 5,
         },
         {
-          targets: 1,
+          render: function (data, type, row) {
+            return `
+              <div class="form-button-action">
+                <button class="btn btn-link btn-danger" data-toggle="tooltip" data-original-title="Deletar" onclick="deleteMass(`+row[0]+`)">
+                  <i class="fa fa-times"></i>
+                </button>
+              </div>`
+          },
+          targets: 7,
+        },
+        {
+          targets: 2,
           createdCell: function (td, cellData, rowData, row, col) {
             $(td).attr('id', 'date_'+rowData[0]).attr('style', 'white-space: nowrap')
           }
         },
         {
-          targets: 5,
+          targets: 6,
           createdCell: function (td, cellData, rowData, row, col) {
             $(td).attr('id', 'faithful_'+rowData[0])
           }
         },
-        { visible: false, targets: [ 2, 3] },
+        { visible: false, targets: [0, 1, 3] },
       ],
       initComplete: function() {
         this.api().columns().every(function() {

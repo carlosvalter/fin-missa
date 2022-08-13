@@ -317,6 +317,7 @@ class Masses extends Controller
     (
     SELECT
       m.id_mass,
+      m.id_type_intention,
       m.faithful,
       m.date,
       t.hour,
@@ -335,36 +336,25 @@ class Masses extends Controller
     
     $columns = array(
       array( 'db' => 'id_mass', 'dt' => 0 ),
+      array( 'db' => 'id_type_intention', 'dt' => 1 ),
       array(
         'db'        => 'date',
-        'dt'        => 1,
+        'dt'        => 2,
         'formatter' => function( $d, $row ) {
           return date( 'd/m/Y', strtotime($d));
         }
       ),
       array(
         'db'        => 'hour',
-        'dt'        => 2,
+        'dt'        => 3,
         'formatter' => function( $d, $row ) {
           return date( 'H:i', strtotime($d));
         }
       ),
-      array( 'db' => 'info', 'dt' => 3 ),
-      array( 'db' => 'title', 'dt' => 4 ),
-      array( 'db' => 'faithful', 'dt' => 5 ),
-      array(
-        'db'        => 'id_mass',
-        'dt'        => 6,
-        'formatter' => function( $d, $row ) {
-          return <<<EOT
-            <div class="form-button-action">
-              <button class="btn btn-link btn-danger" data-toggle="tooltip" data-original-title="Deletar" onclick="deleteMass($d)">
-                <i class="fa fa-times"></i>
-              </button>
-            </div>
-          EOT;
-        }
-      ),
+      array( 'db' => 'info', 'dt' => 4 ),
+      array( 'db' => 'title', 'dt' => 5 ),
+      array( 'db' => 'faithful', 'dt' => 6 ),
+      array( 'db' => 'id_mass', 'dt' => 7),
     );
 
     // SQL server connection information
