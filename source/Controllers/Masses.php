@@ -360,14 +360,6 @@ class Masses extends Controller
       'host' => DATA_LAYER_CONFIG['host']
     );
     
-    
-    /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-     * If you just want to use the basic configuration for DataTables with PHP
-     * server-side, there is no need to edit below this line.
-     */
-    
-    // require( 'ssp.class.php' );
-    
     echo json_encode(
       SSP::complex( $_GET, $sql_details, $table, $primaryKey, $columns )
     );
