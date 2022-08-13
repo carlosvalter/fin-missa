@@ -81,7 +81,7 @@
       language: {
         "url": "//cdn.datatables.net/plug-ins/1.10.20/i18n/Portuguese-Brasil.json",
       },
-      pageLength: 10,
+      pageLength: 30,
       processing: true,
       serverSide: true,
       ajax: '<?= $router->route("masses.ajaxListMasses") ?>',
@@ -125,7 +125,7 @@
             $(td).attr('id', 'faithful_'+rowData[0])
           }
         },
-        { visible: false, targets: [0, 1, 3] },
+        { visible: false, targets: [0, 1, 3, 4] },
       ],
       initComplete: function() {
         this.api().columns().every(function() {

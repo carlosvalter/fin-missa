@@ -21,14 +21,9 @@ class Masses extends Controller
 
   public function index(): void
   {
-    $dateNow = date('Y-m-d');
-    
-    $masses = (new EntityMass())->find("date >= :date", "date={$dateNow}")->order('date, id_type_intention')->fetch(true);
-
     echo $this->view->render("theme/masses/index", [
       "title" => "Pedidos de Missa | " . site("name"),
-      "pageTitle" => "Pedidos de Missa",
-      "masses" => $masses
+      "pageTitle" => "Pedidos de Missa"
     ]);
   }
   public function new(array $data): void
@@ -359,10 +354,10 @@ class Masses extends Controller
 
     // SQL server connection information
     $sql_details = array(
-      'user' => 'root',
-      'pass' => 'tiger',
-      'db'   => 'fin_missa',
-      'host' => 'database'
+      'user' => DATA_LAYER_CONFIG['username'],
+      'pass' => DATA_LAYER_CONFIG['passwd'],
+      'db'   => DATA_LAYER_CONFIG['dbname'],
+      'host' => DATA_LAYER_CONFIG['host']
     );
     
     
