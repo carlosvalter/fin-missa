@@ -61,6 +61,7 @@ $router->get("/cadastrar", "Masses:new", "masses.new");
 $router->post("/cadastrar", "Masses:new", "masses.new");
 $router->get("/deletar/{id_mass}", "Masses:delete", "masses.delete");
 $router->post("/ajaxtiposmissa", "Masses:ajaxTypesMass", "masses.ajaxTypesMass");
+$router->get("/ajaxlistmasses", "Masses:ajaxListMasses", "masses.ajaxListMasses");
 $router->get("/relatorio", "Masses:report", "masses.report");
 $router->post("/relatorio", "Masses:report", "masses.report");
 

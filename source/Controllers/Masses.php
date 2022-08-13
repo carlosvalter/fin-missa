@@ -8,6 +8,7 @@ use Source\Models\Cash as EntityCash;
 use Source\Models\Mass as EntityMass;
 use Source\Models\TypeIntention as EntityTypeIntention;
 use Source\Models\TypeMass as EntityTypeMass;
+use Source\Controllers\SSP;
 
 class Masses extends Controller
 {
@@ -20,17 +21,11 @@ class Masses extends Controller
 
   public function index(): void
   {
-    $dateNow = date('Y-m-d');
-    
-    $masses = (new EntityMass())->find("date >= :date", "date={$dateNow}")->order('date, id_type_intention')->fetch(true);
-
     echo $this->view->render("theme/masses/index", [
       "title" => "Pedidos de Missa | " . site("name"),
-      "pageTitle" => "Pedidos de Missa",
-      "masses" => $masses
+      "pageTitle" => "Pedidos de Missa"
     ]);
   }
-
   public function new(array $data): void
   {
 
@@ -286,5 +281,95 @@ class Masses extends Controller
         'message' => $mass->fail()->getMessage()
       ];
     }
+  }
+
+  public function ajaxListMasses(): void
+  {
+    /*
+     * DataTables example server-side processing script.
+     *
+     * Please note that this script is intentionally extremely simple to show how
+     * server-side processing can be implemented, and probably shouldn't be used as
+     * the basis for a large complex system. It is suitable for simple use cases as
+     * for learning.
+     *
+     * See http://datatables.net/usage/server-side for full details on the server-
+     * side processing requirements of DataTables.
+     *
+     * @license MIT - http://datatables.net/license_mit
+     */
+    
+    /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+     * Easy set variables
+     */
+    
+    $dateNow = date('Y-m-d');
+
+    // DB table to use
+    // Modificado para usar join
+    // https://www.gyrocode.com/articles/jquery-datatables-using-where-join-and-group-by-with-ssp-class-php/
+    $table = <<<EOT
+    (
+    SELECT
+      m.id_mass,
+      m.id_type_intention,
+      m.faithful,
+      m.date,
+      t.hour,
+      i.title,
+      CONCAT(t.title,' - ', TIME_FORMAT(t.hour, '%H:%i'), ' - R$ ',CAST(FORMAT(m.amount_paid, 2, 'de_DE') AS CHAR CHARACTER SET utf8)) AS info
+    FROM masses m
+    LEFT JOIN typesIntention i ON m.id_type_intention = i.id_type_intention
+    LEFT JOIN typesMass t ON m.id_type_mass = t.id_type_mass
+    WHERE m.date >= '{$dateNow}'
+    ORDER BY m.date, m.id_type_intention
+    ) temp
+   EOT;
+
+    // Table's primary key
+    $primaryKey = 'id_mass';
+    
+    $columns = array(
+      array( 'db' => 'id_mass', 'dt' => 0 ),
+      array( 'db' => 'id_type_intention', 'dt' => 1 ),
+      array(
+        'db'        => 'date',
+        'dt'        => 2,
+        'formatter' => function( $d, $row ) {
+          return date( 'd/m/Y', strtotime($d));
+        }
+      ),
+      array(
+        'db'        => 'hour',
+        'dt'        => 3,
+        'formatter' => function( $d, $row ) {
+          return date( 'H:i', strtotime($d));
+        }
+      ),
+      array( 'db' => 'info', 'dt' => 4 ),
+      array( 'db' => 'title', 'dt' => 5 ),
+      array( 'db' => 'faithful', 'dt' => 6 ),
+      array( 'db' => 'id_mass', 'dt' => 7),
+    );
+
+    // SQL server connection information
+    $sql_details = array(
+      'user' => DATA_LAYER_CONFIG['username'],
+      'pass' => DATA_LAYER_CONFIG['passwd'],
+      'db'   => DATA_LAYER_CONFIG['dbname'],
+      'host' => DATA_LAYER_CONFIG['host']
+    );
+    
+    
+    /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+     * If you just want to use the basic configuration for DataTables with PHP
+     * server-side, there is no need to edit below this line.
+     */
+    
+    // require( 'ssp.class.php' );
+    
+    echo json_encode(
+      SSP::complex( $_GET, $sql_details, $table, $primaryKey, $columns )
+    );
   }
 }
