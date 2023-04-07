@@ -214,11 +214,30 @@ class Masses extends Controller
           $i = 0;
           foreach ($masses as $key => $mass) {
             if ($mass->id_type_intention == $id_type_intention) {
-              $massesArray[$titleTypeIntention][$i++] = $mass;
+              $massesArray[$titleTypeIntention]['empty_lines'] = 5;
+              $massesArray[$titleTypeIntention]['data'][$i++] = $mass;
               unset($masses[$key]); // Diminui matriz para o proximo laço ser mais rapido
             }
           }
         }
+
+        /*
+        $typesIntentionArray =
+        [
+          '0' => 'louvor',
+        ]
+
+        $massesArray =
+        [
+          'louvor' => [
+            'empty_lines' => 5,
+            'data' => [
+              0 => entity mass,
+              1 => entity mass,
+            ]
+          ]
+        ]
+        */
 
         $dompdf = new Dompdf(["enable_remote" => true]);
         ob_start(); // Abre uma sessao de cache, tudo q esta abaixo ira para uma variavel de cache, e não para a tela
