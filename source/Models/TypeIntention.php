@@ -8,7 +8,7 @@ class TypeIntention extends DataLayer
 {
   public function __construct()
   {
-    parent::__construct("typesIntention", ["title"], "id_type_intention");
+    parent::__construct("typesIntention", ["title", "empty_lines"], "id_type_intention");
   }
 
   /**
