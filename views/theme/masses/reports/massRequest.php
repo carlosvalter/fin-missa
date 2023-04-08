@@ -115,7 +115,7 @@
 
     td.empty {
       width: 50%;
-      height: 12pt;
+      height: 15pt;
     }
 
     .date {

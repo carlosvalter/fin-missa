@@ -207,15 +207,18 @@ class Masses extends Controller
 
         //create a array of intention
         foreach ($typesIntention as $typeIntention) {
-          $typesIntentionArray[$typeIntention->id_type_intention] = $typeIntention->title;
+          $typesIntentionArray[$typeIntention->id_type_intention] = [
+            'title' => $typeIntention->title, 
+            'empty_lines' => $typeIntention->empty_lines
+          ];
         }
 
         foreach ($typesIntentionArray as $id_type_intention => $titleTypeIntention) {
           $i = 0;
           foreach ($masses as $key => $mass) {
             if ($mass->id_type_intention == $id_type_intention) {
-              $massesArray[$titleTypeIntention]['empty_lines'] = 5;
-              $massesArray[$titleTypeIntention]['data'][$i++] = $mass;
+              $massesArray[$titleTypeIntention['title']]['empty_lines'] = $typesIntentionArray[$id_type_intention]['empty_lines'];
+              $massesArray[$titleTypeIntention['title']]['data'][$i++] = $mass;
               unset($masses[$key]); // Diminui matriz para o proximo laço ser mais rapido
             }
           }
@@ -224,7 +227,10 @@ class Masses extends Controller
         /*
         $typesIntentionArray =
         [
-          '0' => 'louvor',
+          'id' => [
+            'title' => 'louvor',
+            'empty_lines' => 10
+          ],
         ]
 
         $massesArray =
