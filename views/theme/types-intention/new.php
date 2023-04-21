@@ -17,6 +17,10 @@
                 <input type="hidden" name="id_type_intention" value="<?= $typeIntention->id_type_intention ?>">
                 <input type="text" class="form-control" id="inputTitle" name="title" placeholder="Título da intenção" value="<?= $typeIntention->title ?>">
               </div>
+              <div class="form-group">
+                <label for="inputEmptyLines">Linhas em branco</label>
+                <input type="text" class="form-control" id="inputEmptyLines" name="empty_lines" placeholder="Quantidade de linhas em branco no relatório" value="<?= $typeIntention->empty_lines ?>">
+              </div>
             </div>
           </div>
         </div>

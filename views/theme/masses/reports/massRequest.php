@@ -113,6 +113,11 @@
       padding-left: 5px;
     }
 
+    td.empty {
+      width: 50%;
+      height: 15pt;
+    }
+
     .date {
       border: 0px;
       background-color: #ffffff;
@@ -162,7 +167,7 @@ $dayWeekNumber = date('w', strtotime($date));
           </tr>
         </thead>
         <?php
-        foreach ($masses as $key => $mass) :
+        foreach ($masses['data'] as $key => $mass) :
           if (!($key % 2)) : ?>
             <tr>
               <td class="col1"><?= $mass->faithful ?></td>
@@ -171,12 +176,20 @@ $dayWeekNumber = date('w', strtotime($date));
           else : ?>
               <td class="col2"><?= $mass->faithful ?></td>
             </tr>
-        <?php
+            <?php
             $openTr = false; // Flag used to check if the tag <tr> has closed
           endif;
         endforeach;
         echo ($openTr) ? '<td></td></tr>' : ''; // Close tag <tr> if it was left open in even columns
-        ?>
+        
+        // imprime linhas em branco
+        for ($line=1; $line <= $masses['empty_lines']; $line++) : ?> 
+          <tr>
+              <td class="empty"> </td>
+              <td class="empty"> </td>
+          </tr>
+          <?php
+        endfor; ?>
       </table>
       <br><br>
     <?php

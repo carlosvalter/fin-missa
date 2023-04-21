@@ -13,12 +13,14 @@
     <thead>
       <tr>
         <th>Título</th>
+        <th>Linhas em Branco</th>
         <th>Ação</th>
       </tr>
     </thead>
     <tfoot>
       <tr>
         <th>Título</th>
+        <th>Linhas em Branco</th>
         <th>Ação</th>
       </tr>
     </tfoot>
@@ -29,6 +31,7 @@
       ?>
           <tr>
             <td id="title_<?= $typeIntention->id_type_intention ?>"><?= $typeIntention->title ?></td>
+            <td id="empty_lines_<?= $typeIntention->id_type_intention ?>"><?= $typeIntention->empty_lines ?></td>
             <td>
               <div class="form-button-action">
                 <a class="btn btn-link btn-primary btn-lg" href="<?= $router->route("typesintention.update", ["id_type_intention" => $typeIntention->id_type_intention]); ?>" data-toggle="tooltip" data-original-title="Editar">
