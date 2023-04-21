@@ -49,7 +49,7 @@ class TypesIntention extends Controller
       }
 
       $typeIntention->title = $data['title'];
-      $typeIntention->empty_lines = $data['empty_lines'];
+      $typeIntention->empty_lines = ($data['empty_lines'] != "") ? $data['empty_lines'] : 0;
 
       if ($typeIntention->save()) {
         // Receive by ajax
