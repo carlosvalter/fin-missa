@@ -18,6 +18,6 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- Update for table `typesIntention`
 -- -----------------------------------------------------
 START TRANSACTION;
-ALTER TABLE `typesIntention` ADD `empty_lines` INT(2) NULL DEFAULT '0' AFTER `title`;
+ALTER TABLE `typesIntention` ADD `empty_lines` INT(2) NOT NULL DEFAULT '0' AFTER `title`;
 
 COMMIT;
