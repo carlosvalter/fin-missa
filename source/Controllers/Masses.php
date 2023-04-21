@@ -207,18 +207,54 @@ class Masses extends Controller
 
         //create a array of intention
         foreach ($typesIntention as $typeIntention) {
-          $typesIntentionArray[$typeIntention->id_type_intention] = $typeIntention->title;
+          $typesIntentionArray[$typeIntention->id_type_intention] = [
+            'title' => $typeIntention->title, 
+            'empty_lines' => $typeIntention->empty_lines
+          ];
         }
 
         foreach ($typesIntentionArray as $id_type_intention => $titleTypeIntention) {
           $i = 0;
+
+          // Adiciona tipo de intenção que tenha que imprimir linhas em branco, independente de ter pedidos
+          if ($typesIntentionArray[$id_type_intention]['empty_lines'] > 0) {
+              $massesArray[$titleTypeIntention['title']]['empty_lines'] = $typesIntentionArray[$id_type_intention]['empty_lines'];
+              $massesArray[$titleTypeIntention['title']]['data'][0] = [];
+          }
+
           foreach ($masses as $key => $mass) {
             if ($mass->id_type_intention == $id_type_intention) {
-              $massesArray[$titleTypeIntention][$i++] = $mass;
+              $massesArray[$titleTypeIntention['title']]['empty_lines'] = $typesIntentionArray[$id_type_intention]['empty_lines'];
+              $massesArray[$titleTypeIntention['title']]['data'][$i++] = $mass;
               unset($masses[$key]); // Diminui matriz para o proximo laço ser mais rapido
-            }
+            } 
           }
         }
+
+        /*
+        $typesIntentionArray =
+        [
+          'id' => [
+            'title' => 'louvor',
+            'empty_lines' => 10
+          ],
+        ]
+
+        $massesArray =
+        [
+          'louvor' => [
+            'empty_lines' => 5,
+            'data' => [
+              0 => entity mass,
+              1 => entity mass,
+            ]
+          ],
+          'Falecimento' => [
+            'empty_lines' => 3,
+            'data' => [ ]
+          ]
+        ]
+        */
 
         $dompdf = new Dompdf(["enable_remote" => true]);
         ob_start(); // Abre uma sessao de cache, tudo q esta abaixo ira para uma variavel de cache, e não para a tela
