@@ -3,50 +3,71 @@
 Esse sistema tem como objetivo o controle da parte financeira de igrejas Católicas Apostólica Romana e gerar **impressão dos pedidos de missa**, para leitura na abertura da missa.
 
 A principio projetado para controlar o financeiro referente a:
-* Pedido de intenção de missa;
-* Doação;
-* Apadrinhamento.
+
+- Pedido de intenção de missa;
+- Doação;
+- Apadrinhamento.
 
 # Screenshot
 
 ## Login
+
 ![Login](./views/assets/img/screenshot/login.png)
 
 ---
+
 ## Tipos de missa
+
 ![Tipos de missa](./views/assets/img/screenshot/tipos-de-missa.png)
 
 ---
+
 ## Tipos de intenções
+
 ![Tipos de intenções](./views/assets/img/screenshot/tipos-de-intencoes.png)
 
 ---
+
 ## Pedidos de missa
+
 ![Pedidos de missa](./views/assets/img/screenshot/pedidos-de-missa.png)
 
 ---
+
 ## Impressão de pedidos de missa
+
 ### Tela de impressão
+
 ![Tela de Impressão de pedidos de missa](./views/assets/img/screenshot/tela-rel-pedido-missa.png)
 
 ---
+
 ### PDF Pedidos de missa
+
 ![PDF Pedidos de missa](./views/assets/img/screenshot/pdf-rel-pedido-missa.png)
 
 ---
+
 ## Caixa
+
 ![Caixa](./views/assets/img/screenshot/caixa.png)
 
 ---
+
 ## PDF Movimento do Caixa
+
 ![PDF movimento do caixa](./views/assets/img/screenshot/pdf-rel-movimento-caixa.png)
 
 ---
+
 ## Retirada do caixa
+
 ![Retirada do caixa](./views/assets/img/screenshot/retirada-do-caixa.png)
 
 ---
+
 ## Diagrama de entidades relacionais
+
 ![DER](./projeto-db/Diagrama-ER.png)
 
 ---
@@ -65,26 +86,27 @@ No banco de dados padrão já vem cadastrado alguns tipos de intenções, porem 
 
 Nessa versão as retiradas do caixa poderá ser realizada pelo usuário nível 1 (Padre), porem o sistema não controla as retiradas, somente abate no caixa.
 
-Como template do sistema foi usado o [Atlantis Lite](https://www.themekita.com/atlantis-lite-bootstrap-dashboard.html
-) da [Theme Kita](https://www.themekita.com
-), em sua versão _free_.
+Como template do sistema foi usado o [Atlantis Lite](https://www.themekita.com/atlantis-lite-bootstrap-dashboard.html) da [Theme Kita](https://www.themekita.com), em sua versão _free_.
 
 Alguns componentes do layout padrão foram `<!-- comentados -->` pelo fato de não estarem implantado nessa versão ou por não usar. No entanto é facilmente colocado em uso removendo os comentarios.
 
 # Instalação
 
 ## Requisitos
-* Servidor Web
-* PHP 7
-* MySql 5.7
-* Compose
+
+- Servidor Web
+- PHP 7
+- MySql 5.7
+- Compose
 
 ## Instalação e configuração
+
 1. Clone o projeto;
 2. Execute o compose na raiz do projeto, para baixar as dependências `php composer.phar update`;
 3. Suba os arquivos para sua hospedagem ou em seu servidor _web_ local, caso esteja rodando em máquina local;
-2. Crie um banco de dados em MySql e execute o script SQL localizado em `projeto-db/schema.sql`
-3. Configure em `source/Config.php` de acordo com seus dados:
+4. Crie um banco de dados em MySql e execute o script SQL localizado em `projeto-db/schema.sql`, `projeto-db/update-xxx.sql`. Execute na sequencia correta;
+5. Configure em `source/Config.php` de acordo com seus dados:
+
 ```
 "root" => "http://dominio.com.br[/fin-missa]" // [/fin-missa] somente se estiver em um subdiretório
 "domain" => "fin-missa.dominio.com.br",
@@ -97,17 +119,18 @@ Alguns componentes do layout padrão foram `<!-- comentados -->` pelo fato de n�
 ```
 
 # Usuário padrão
+
 No banco de dado já vem com um usuário para acesso padrão, esse deverá ser trocado a senha após o primeiro acesso, por motivo de segurança.
 
-* Usuário: admin
-* Senha: admin
+- Usuário: admin
+- Senha: admin
 
 ---
 
-Esse sistema foi desenvolvido pela empresa [5 Bits](https://5bits.com.br) sem fins lucrativo. Esteja a vontade para instalar em sua paróquia sem fins lucrativos.
+Esse sistema foi desenvolvido por Carlos Valter - [Linkedin](https://www.linkedin.com/in/carlos-valter/) - sem fins lucrativo. Esteja a vontade para instalar em sua paróquia sem fins lucrativos.
 
-_Developer by Carlos Valter dos Santos Ferreira – CTO 5 Bits_
+_Developer by Carlos Valter dos Santos Ferreira_
 
-_E-mail suporte@5bits.com.br_
+_E-mail carlosvalter@hotmail.com_
 
 **Licença MIT**

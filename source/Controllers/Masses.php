@@ -215,12 +215,19 @@ class Masses extends Controller
 
         foreach ($typesIntentionArray as $id_type_intention => $titleTypeIntention) {
           $i = 0;
+
+          // Adiciona tipo de intenção que tenha que imprimir linhas em branco, independente de ter pedidos
+          if ($typesIntentionArray[$id_type_intention]['empty_lines'] > 0) {
+              $massesArray[$titleTypeIntention['title']]['empty_lines'] = $typesIntentionArray[$id_type_intention]['empty_lines'];
+              $massesArray[$titleTypeIntention['title']]['data'][0] = [];
+          }
+
           foreach ($masses as $key => $mass) {
             if ($mass->id_type_intention == $id_type_intention) {
               $massesArray[$titleTypeIntention['title']]['empty_lines'] = $typesIntentionArray[$id_type_intention]['empty_lines'];
               $massesArray[$titleTypeIntention['title']]['data'][$i++] = $mass;
               unset($masses[$key]); // Diminui matriz para o proximo laço ser mais rapido
-            }
+            } 
           }
         }
 
@@ -241,6 +248,10 @@ class Masses extends Controller
               0 => entity mass,
               1 => entity mass,
             ]
+          ],
+          'Falecimento' => [
+            'empty_lines' => 3,
+            'data' => [ ]
           ]
         ]
         */

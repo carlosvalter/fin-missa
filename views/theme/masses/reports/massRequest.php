@@ -176,11 +176,12 @@ $dayWeekNumber = date('w', strtotime($date));
           else : ?>
               <td class="col2"><?= $mass->faithful ?></td>
             </tr>
-        <?php
+            <?php
             $openTr = false; // Flag used to check if the tag <tr> has closed
           endif;
         endforeach;
         echo ($openTr) ? '<td></td></tr>' : ''; // Close tag <tr> if it was left open in even columns
+        
         // imprime linhas em branco
         for ($line=1; $line <= $masses['empty_lines']; $line++) : ?> 
           <tr>
