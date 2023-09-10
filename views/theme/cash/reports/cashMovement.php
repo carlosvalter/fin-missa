@@ -107,10 +107,23 @@
       text-align: left;
     }
 
-    td.col1,
-    td.col2 {
-      width: 50%;
-      padding-left: 5px;
+    .colDate,
+    .colValue {
+      width: 12%;
+    }
+
+    .colNameCash {
+      width: 15%;
+    }
+
+    td.colDate,
+    td.colNameCash {
+      text-align: center;
+    }
+
+    th.colValue,
+    td.colValue {
+      text-align: right;
     }
 
     .date {
@@ -151,13 +164,13 @@
       foreach ($massesArray as $nameCash => $masses) : ?>
         <tr>
           <td><?= $nameCash ?></td>
-          <td>
+          <td class="colValue">
             <?php
             $amount = 0.00;
             foreach ($masses as $key => $mass) {
               $amount += $mass->amount_paid;
             }
-            echo "R$ " . number_format($amount, 2, ',', '.');
+            echo number_format($amount, 2, ',', '.');
             $totalAmount += $amount;
             ?>
           </td>
@@ -167,7 +180,37 @@
       <tfoot>
         <tr>
           <th>Total</th>
-          <th><?= "R$ " . number_format($totalAmount, 2, ',', '.'); ?></th>
+          <th class="colValue"><?= number_format($totalAmount, 2, ',', '.'); ?></th>
+        </tr>
+      </tfoot>
+    </table>
+    <br><br>
+
+    <h3>Movimentos do dia <?= $data['created_at'] ?></h3>
+    <table class="relatorio">
+      <thead>
+        <tr>
+          <th>Fiel</th>
+          <th class="colDate">Data</th>
+          <th>Valor</th>
+          <th class="colNameCash">Caixa</th>
+        </tr>
+      </thead>
+      <?php
+      foreach ($massesArray as $nameCash => $masses) :
+        foreach ($masses as $key => $mass) : ?>
+          <tr>
+            <td><?= $mass->faithful ?></td>
+            <td class="colDate"><?= convertDate($mass->date) ?></td>
+            <td class="colValue"><?= number_format($mass->amount_paid , 2, ',', '.') ?></td>
+            <td class="colNameCash"><?= $nameCash ?></td>
+          </tr>
+        <?php
+        endforeach;
+      endforeach; ?>
+      <tfoot>
+        <tr>
+          <th colspan="4">&nbsp;</th>
         </tr>
       </tfoot>
     </table>

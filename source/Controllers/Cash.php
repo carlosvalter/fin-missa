@@ -202,7 +202,7 @@ class Cash extends Controller
 
         $pdf = ob_get_clean(); // recebe o conteudo do cache do PHP
 
-        // For see in html discoment the line below
+        // For see in html uncomment the line below
         // echo $pdf; die;
 
         $dompdf->loadHtml($pdf); // Converte o conteudo html gerado para PDF
@@ -213,7 +213,7 @@ class Cash extends Controller
 
         $dompdf->stream("file.pdf", ['Attachment' => false]); // Abre o PDF
       } else {
-        echo "<script>alert('Nenhuma caixa encontrado nessa data!'); window.close()</script>";
+        echo "<script>alert('Nenhum caixa encontrado nessa data!'); window.close()</script>";
       }
     } else {
       echo $this->view->render("theme/cash/reportCashMovement", [
