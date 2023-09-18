@@ -186,35 +186,39 @@
     </table>
     <br><br>
 
-    <h3>Movimentos do dia <?= $data['created_at'] ?></h3>
-    <table class="relatorio">
-      <thead>
-        <tr>
-          <th>Fiel</th>
-          <th class="colDate">Data</th>
-          <th>Valor</th>
-          <th class="colNameCash">Caixa</th>
-        </tr>
-      </thead>
-      <?php
-      foreach ($massesArray as $nameCash => $masses) :
-        foreach ($masses as $key => $mass) : ?>
+    <?php
+    if ($data['analytic']): ?>
+      <h3>Movimentos do dia <?= $data['created_at'] ?></h3>
+      <table class="relatorio">
+        <thead>
           <tr>
-            <td><?= $mass->faithful ?></td>
-            <td class="colDate"><?= convertDate($mass->date) ?></td>
-            <td class="colValue"><?= number_format($mass->amount_paid , 2, ',', '.') ?></td>
-            <td class="colNameCash"><?= $nameCash ?></td>
+            <th>Fiel</th>
+            <th class="colDate">Data</th>
+            <th>Valor</th>
+            <th class="colNameCash">Caixa</th>
           </tr>
+        </thead>
         <?php
-        endforeach;
-      endforeach; ?>
-      <tfoot>
-        <tr>
-          <th colspan="4">&nbsp;</th>
-        </tr>
-      </tfoot>
-    </table>
-    <br><br>
+        foreach ($massesArray as $nameCash => $masses) :
+          foreach ($masses as $key => $mass) : ?>
+            <tr>
+              <td><?= $mass->faithful ?></td>
+              <td class="colDate"><?= convertDate($mass->date) ?></td>
+              <td class="colValue"><?= number_format($mass->amount_paid , 2, ',', '.') ?></td>
+              <td class="colNameCash"><?= $nameCash ?></td>
+            </tr>
+          <?php
+          endforeach;
+        endforeach; ?>
+        <tfoot>
+          <tr>
+            <th colspan="4">&nbsp;</th>
+          </tr>
+        </tfoot>
+      </table>
+      <br><br>
+    <?php
+    endif; ?>
   </div>
 
 </body>
