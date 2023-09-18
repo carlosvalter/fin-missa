@@ -23,6 +23,12 @@
               </div>
             </div>
           </div>
+          <div class="form-check">
+            <label class="form-check-label">
+              <input class="form-check-input" type="checkbox" name="analytic" value="1">
+              <span class="form-check-sign">Exibir analítico</span>
+            </label>
+          </div>          
           <div class="card-action">
             <button id="submit" type="submit" class="btn btn-primary">Gerar</button>
           </div>
