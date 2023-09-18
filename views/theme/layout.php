@@ -490,7 +490,7 @@ if (!array_key_exists('user', $_SESSION))
               <li class="nav-item">
                 <a class="nav-link" href="https://github.com/carlosvalter/fin-missa/releases" target="_blank"
                   data-toggle="tooltip" data-placement="top" title="Verifique novas atualizações">
-                  <v1 class="0 1">v1.6.0</v1>
+                  <v1 class="0 1">v1.6.1</v1>
                 </a>
               </li>
               <li class="nav-item">
@@ -502,7 +502,7 @@ if (!array_key_exists('user', $_SESSION))
           </nav>
           <div class="copyright ml-auto">
             2020, feito com <i class="fa fa-heart heart text-danger"></i> por <a target="_blank"
-              href="https://www.5bits.com.br">5 Bits</a>
+              href="https://github.com/carlosvalter">Carlos Valter</a>
           </div>
         </div>
       </footer>
